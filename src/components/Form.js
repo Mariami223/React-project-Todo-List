@@ -3,14 +3,17 @@ import { v4 as uuid } from "uuid";
 
 const Form = ({ inputText, setInputText, setTodos, todos, setStatus }) => {
   const inputTextHandler = (e) => {
-    console.log(e.target.value);
     setInputText(e.target.value);
   };
 
   const submitTodoHandler = (e) => {
-    e.preventDefault();
-    setTodos([...todos, { text: inputText, completed: false, id: uuid() }]);
-    setInputText("");
+    if (inputText) {
+      e.preventDefault();
+      setTodos([...todos, { text: inputText, completed: false, id: uuid() }]);
+      setInputText("");
+    } else {
+      alert("Please Write Some Todos");
+    }
   };
 
   const statusHandler = (e) => {
